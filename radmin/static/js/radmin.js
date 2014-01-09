@@ -22,7 +22,8 @@ $r(function(){
 
 	// Once the dom is ready, continue
 	// do the request to radmin
-	$r.get("/radmin/ep/", radmin.ctx, function(data){
+	var path = (/com\/([a-zA-Z0-9\-]*)\//).exec(document.URL)[1];
+	$r.get("/" + path + "/radmin/ep/", radmin.ctx, function(data){
 		radmin.build_ui(data);
 	});
 });
@@ -93,7 +94,8 @@ radmin.runcommand = function(e){
 	}else{
 		data = {'target':caller.id}
 	}
-	$r.get("/radmin/rnr/", data, function(data){
+	var path = (/com\/([a-zA-Z0-9\-]*)\//).exec(document.URL)[1];
+	$r.get("/" + path + "/radmin/rnr/", data, function(data){
 		$r(loadicon).hide();
 		// display message if appropriate
 		if(data.display_result){
